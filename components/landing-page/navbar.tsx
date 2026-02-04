@@ -50,13 +50,11 @@ export const Navbar = () => {
       <NavigationMenu className="mx-auto max-w-7xl">
         <NavigationMenuList className=" h-14 px-4 w-screen flex justify-between">
           <NavigationMenuItem className="font-bold flex">
-            <Link
-              rel="noreferrer noopener "
-              href="/"
-              className="ml-2 font-bold text-xl flex text-primary"
-            >
-              <Speech className="mr-2 h-8 w-8" />
-              Speech IQ
+            <Link href="/" className="flex items-center gap-2 font-medium">
+              <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
+                <Speech className="size-6" />
+              </div>
+              Speech IQ.
             </Link>
           </NavigationMenuItem>
 

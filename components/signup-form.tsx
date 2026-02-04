@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
-export function LoginForm({
+export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
@@ -18,9 +18,9 @@ export function LoginForm({
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className=" font-bold text-2xl">Login to your account</h1>
+          <h1 className=" font-bold text-2xl">Signup to your account</h1>
           <p className="text-muted-foreground text-sm text-balance">
-            Enter your email below to login to your account
+            Enter your email below to Signup to your account
           </p>
         </div>
         <Field>
@@ -28,15 +28,7 @@ export function LoginForm({
           <Input id="email" type="email" placeholder="m@example.com" required />
         </Field>
         <Field>
-          <div className="flex items-center">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <a
-              href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
-            >
-              Forgot your password?
-            </a>
-          </div>
+          <FieldLabel htmlFor="password">Password</FieldLabel>
           <Input
             id="password"
             type="password"
@@ -46,7 +38,7 @@ export function LoginForm({
         </Field>
         <Field>
           <Button type="submit" size="xl">
-            Login
+            Signup
           </Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
@@ -70,12 +62,12 @@ export function LoginForm({
                 d="M11.999 4.98c1.62 0 3.06.56 4.21 1.64l3.15-3.15C16.96 1.64 14.47 1 11.999 1 7c-4.8 0-8.07 2.47-9.86 6.05l2.7 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            Login with Google
+            Signup with Google
           </Button>
           <FieldDescription className="text-center text-md">
-            Don&apos;t have an account?{" "}
-            <Link href="/signup" className="underline">
-              <span>Sign up</span>
+            Already have an account?{" "}
+            <Link href="/login" className="underline">
+              <span>Login</span>
             </Link>
           </FieldDescription>
         </Field>

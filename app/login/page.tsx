@@ -9,8 +9,8 @@ export default function LoginPage() {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <Link href="/" className="flex items-center gap-2 font-medium">
-            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-              <Speech className="size-4" />
+            <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
+              <Speech className="size-6" />
             </div>
             Speech IQ.
           </Link>
