@@ -45,8 +45,8 @@ export function LoginForm({
           />
         </Field>
         <Field>
-          <Button type="submit" size="xl">
-            Login
+          <Button type="button" size="xl">
+            <Link href="/dashboard">Login</Link>
           </Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
