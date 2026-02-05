@@ -15,7 +15,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const headerTitle =
     pathname === "/dashboard"
-      ? "Dashboard Home"
+      ? "Dashboard"
       : pathname.split("/")[2]?.charAt(0).toUpperCase() +
         pathname.split("/")[2]?.slice(1).replaceAll("-", " ");
   return (

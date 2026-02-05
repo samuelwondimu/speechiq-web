@@ -7,6 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ModeToggle } from "../theme/mode-toggle";
 
 export function NavUser({
   user,
@@ -32,6 +33,7 @@ export function NavUser({
             <span className="truncate font-medium">{user.name}</span>
             <span className="truncate text-xs">{user.email}</span>
           </div>
+          <ModeToggle />
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
