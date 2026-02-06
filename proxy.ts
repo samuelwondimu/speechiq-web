@@ -25,6 +25,9 @@ export function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // not found, but has an extension - allow (could be a static file)
+  
+
   // Allow requests for files (have an extension)
   if (/\.[a-zA-Z0-9]+$/.test(pathname)) return NextResponse.next();
 

@@ -13,36 +13,43 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "Is this template free?",
-    answer: "Yes. It is a free ChadcnUI template.",
+    question: "What is SpeakIQ?",
+    answer:
+      "SpeakIQ is an AI-powered speaking coach that helps you practice speaking out loud and receive instant feedback on clarity, confidence, pacing, and filler words. It’s built for interviews, presentations, pitches, and everyday communication.",
     value: "item-1",
   },
   {
-    question: "Lorem ipsum dolor sit amet consectetur adipisicing elit?",
+    question: "How does SpeakIQ analyze my speech?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore quidem quam? Consectetur sapiente iste rerum reiciendis animi nihil nostrum sit quo, modi quod.",
+      "After you record a session, SpeakIQ transcribes your speech and analyzes key delivery metrics like speaking speed, pauses, and filler words. These metrics are then used to generate clear, structured feedback you can act on immediately.",
     value: "item-2",
   },
   {
-    question:
-      "Lorem ipsum dolor sit amet  Consectetur natus dolores minus quibusdam?",
+    question: "Do I need special equipment to use SpeakIQ?",
     answer:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore qui nostrum reiciendis veritatis necessitatibus maxime quis ipsa vitae cumque quo?",
+      "No. SpeakIQ works directly in your browser using your device’s microphone. You can practice from your laptop or phone without any additional setup.",
     value: "item-3",
   },
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipisicing elit?",
-    answer: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    question: "Is my voice data private?",
+    answer:
+      "Yes. Your recordings and transcripts are private to your account and are used only to generate your feedback. We don’t share your data, and you can delete your sessions at any time.",
     value: "item-4",
   },
   {
-    question:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus?",
+    question: "Is SpeakIQ free to use?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore quidem quam? Consectetur sapiente iste rerum reiciendis animi nihil nostrum sit quo, modi quod.",
+      "SpeakIQ offers a free plan with limited practice sessions. You can upgrade to a Pro plan for unlimited sessions, detailed feedback, and progress tracking.",
     value: "item-5",
   },
+  {
+    question: "Who is SpeakIQ best for?",
+    answer:
+      "SpeakIQ is ideal for students, professionals, founders, and anyone who wants to improve how they speak. Whether you’re preparing for an interview, a presentation, or a pitch, SpeakIQ helps you practice with confidence.",
+    value: "item-6",
+  },
 ];
+
 
 export const FAQ = () => {
   return (
