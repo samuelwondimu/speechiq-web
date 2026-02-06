@@ -19,7 +19,7 @@ export const Footer = () => {
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">Follow US</h3>
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               <a
                 rel="noreferrer noopener"
                 href="https://twitter.com/samuelwondimu"
@@ -30,7 +30,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               <a
                 rel="noreferrer noopener"
                 href="https://www.linkedin.com/in/speechiq/"
@@ -40,7 +40,7 @@ export const Footer = () => {
             </Button>
           </div>
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               <a
                 rel="noreferrer noopener"
                 href="https://www.instagram.com/speechiq.app/"
@@ -54,19 +54,19 @@ export const Footer = () => {
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">Platforms</h3>
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               Web
             </Button>
           </div>
 
           <div>
-            <Button variant="link" disabled className="pl-0">
+            <Button variant="link" disabled className="pl-0" size="xl">
               Mobile (coming soon)
             </Button>
           </div>
 
           <div>
-            <Button variant="link" disabled className="pl-0">
+            <Button variant="link" disabled className="pl-0" size="xl">
               Desktop App (coming soon)
             </Button>
           </div>
@@ -75,7 +75,7 @@ export const Footer = () => {
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">About</h3>
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               <a rel="noreferrer noopener" key="#features" href="#features">
                 Features
               </a>
@@ -83,7 +83,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               <a
                 rel="noreferrer noopener"
                 key="#testimonials"
@@ -95,7 +95,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <Button variant="link" className="pl-0">
+            <Button variant="link" className="pl-0" size="xl">
               <a rel="noreferrer noopener" key="#faq" href="#faq">
                 FAQ
               </a>
@@ -106,7 +106,7 @@ export const Footer = () => {
 
       <section className="mx-auto max-w-7xl pb-14 text-center">
         <h3>
-          &copy; 2024 Speech IQ. Built by{" "}
+          &copy; {new Date().getFullYear()} Speech IQ. Built by{" "}
           <a
             rel="noreferrer noopener"
             target="_blank"
