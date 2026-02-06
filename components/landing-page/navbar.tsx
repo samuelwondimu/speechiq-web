@@ -33,10 +33,10 @@ const routeList: RouteProps[] = [
     href: "#testimonials",
     label: "Testimonials",
   },
-  {
-    href: "#pricing",
-    label: "Pricing",
-  },
+  // {
+  //   href: "#pricing",
+  //   label: "Pricing",
+  // },
   {
     href: "#faq",
     label: "FAQ",
@@ -89,13 +89,13 @@ export const Navbar = () => {
                       {label}
                     </a>
                   ))}
-                  <Button>
+                  <Button disabled>
                     <Link
                       rel="noreferrer noopener"
                       href="/signup"
                       onClick={() => setIsOpen(false)}
                     >
-                      Get Started
+                      Coming soon
                     </Link>
                   </Button>
                 </nav>
@@ -121,13 +121,13 @@ export const Navbar = () => {
           <div className="hidden md:flex gap-2">
             <ModeToggle />
 
-            <Button size="xl">
+            <Button size="xl" disabled>
               <Link
                 rel="noreferrer noopener"
                 href="/signup"
                 onClick={() => setIsOpen(false)}
               >
-                Get Started
+                Coming soon
               </Link>
             </Button>
           </div>

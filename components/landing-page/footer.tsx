@@ -1,11 +1,12 @@
 import { Speech } from "lucide-react";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export const Footer = () => {
   return (
     <footer id="footer">
       <hr className="mx-auto max-w-7xl mt-24" />
-      <section className="mx-auto max-w-7xl py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
+      <section className="mx-auto max-w-7xl py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-x-12 gap-y-8">
         <div className="col-span-full xl:col-span-2">
           <Link
             rel="noreferrer noopener "
@@ -20,132 +21,87 @@ export const Footer = () => {
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">Follow US</h3>
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Github
-            </a>
+            <Button variant="link" className="pl-0">
+              <a
+                rel="noreferrer noopener"
+                href="https://twitter.com/samuelwondimu"
+              >
+                Twitter
+              </a>
+            </Button>
           </div>
 
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Twitter
-            </a>
+            <Button variant="link" className="pl-0">
+              <a
+                rel="noreferrer noopener"
+                href="https://www.linkedin.com/in/speechiq/"
+              >
+                LinkedIn
+              </a>
+            </Button>
           </div>
-
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Dribbble
-            </a>
+            <Button variant="link" className="pl-0">
+              <a
+                rel="noreferrer noopener"
+                href="https://www.instagram.com/speechiq.app/"
+              >
+                Instagram
+              </a>
+            </Button>
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">Platforms</h3>
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
+            <Button variant="link" className="pl-0">
               Web
-            </a>
+            </Button>
           </div>
 
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Mobile
-            </a>
+            <Button variant="link" disabled className="pl-0">
+              Mobile (coming soon)
+            </Button>
           </div>
 
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Desktop
-            </a>
+            <Button variant="link" disabled className="pl-0">
+              Desktop App (coming soon)
+            </Button>
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">About</h3>
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Features
-            </a>
+            <Button variant="link" className="pl-0">
+              <a rel="noreferrer noopener" key="#features" href="#features">
+                Features
+              </a>
+            </Button>
           </div>
 
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Pricing
-            </a>
+            <Button variant="link" className="pl-0">
+              <a
+                rel="noreferrer noopener"
+                key="#testimonials"
+                href="#testimonials"
+              >
+                Testimonals
+              </a>
+            </Button>
           </div>
 
           <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              FAQ
-            </a>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold text-lg">Community</h3>
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Youtube
-            </a>
-          </div>
-
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Discord
-            </a>
-          </div>
-
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Twitch
-            </a>
+            <Button variant="link" className="pl-0">
+              <a rel="noreferrer noopener" key="#faq" href="#faq">
+                FAQ
+              </a>
+            </Button>
           </div>
         </div>
       </section>
