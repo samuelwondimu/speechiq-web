@@ -5,8 +5,8 @@ import { Button } from "../ui/button";
 export const Footer = () => {
   return (
     <footer id="footer">
-      <hr className="mx-auto max-w-7xl mt-24" />
-      <section className="mx-auto max-w-7xl py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-x-12 gap-y-8">
+      <hr className="mx-auto max-w-7xl mt-24 " />
+      <section className="mx-auto max-w-7xl py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 px-6 gap-x-12 gap-y-8">
         <div className="col-span-full xl:col-span-2">
           <Link href="/" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
