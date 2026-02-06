@@ -13,21 +13,21 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "What is SpeakIQ?",
+    question: "What is SpeechIQ?",
     answer:
-      "SpeakIQ is an AI-powered speaking coach that helps you practice speaking out loud and receive instant feedback on clarity, confidence, pacing, and filler words. It’s built for interviews, presentations, pitches, and everyday communication.",
+      "SpeechIQ is an AI-powered speaking coach that helps you practice speaking out loud and receive instant feedback on clarity, confidence, pacing, and filler words. It’s built for interviews, presentations, pitches, and everyday communication.",
     value: "item-1",
   },
   {
-    question: "How does SpeakIQ analyze my speech?",
+    question: "How does SpeechIQ analyze my speech?",
     answer:
-      "After you record a session, SpeakIQ transcribes your speech and analyzes key delivery metrics like speaking speed, pauses, and filler words. These metrics are then used to generate clear, structured feedback you can act on immediately.",
+      "After you record a session, SpeechIQ transcribes your speech and analyzes key delivery metrics like speaking speed, pauses, and filler words. These metrics are then used to generate clear, structured feedback you can act on immediately.",
     value: "item-2",
   },
   {
-    question: "Do I need special equipment to use SpeakIQ?",
+    question: "Do I need special equipment to use SpeechIQ?",
     answer:
-      "No. SpeakIQ works directly in your browser using your device’s microphone. You can practice from your laptop or phone without any additional setup.",
+      "No. SpeechIQ works directly in your browser using your device’s microphone. You can practice from your laptop or phone without any additional setup.",
     value: "item-3",
   },
   {
@@ -37,15 +37,15 @@ const FAQList: FAQProps[] = [
     value: "item-4",
   },
   {
-    question: "Is SpeakIQ free to use?",
+    question: "Is SpeechIQ free to use?",
     answer:
-      "SpeakIQ offers a free plan with limited practice sessions. You can upgrade to a Pro plan for unlimited sessions, detailed feedback, and progress tracking.",
+      "SpeechIQ offers a free plan with limited practice sessions. You can upgrade to a Pro plan for unlimited sessions, detailed feedback, and progress tracking.",
     value: "item-5",
   },
   {
-    question: "Who is SpeakIQ best for?",
+    question: "Who is SpeechIQ best for?",
     answer:
-      "SpeakIQ is ideal for students, professionals, founders, and anyone who wants to improve how they speak. Whether you’re preparing for an interview, a presentation, or a pitch, SpeakIQ helps you practice with confidence.",
+      "SpeechIQ is ideal for students, professionals, founders, and anyone who wants to improve how they speak. Whether you’re preparing for an interview, a presentation, or a pitch, SpeechIQ helps you practice with confidence.",
     value: "item-6",
   },
 ];
