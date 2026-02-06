@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import LottieWave from "../lottie-wave";
 
 export const Hero = () => {
   return (
@@ -32,7 +33,9 @@ export const Hero = () => {
         </div>
       </div>
 
-      <div className="z-10">{/* Hero visual / dashboard preview */}</div>
+      <div className="">
+        <LottieWave />
+      </div>
     </section>
   );
 };
