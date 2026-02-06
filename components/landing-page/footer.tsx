@@ -8,13 +8,11 @@ export const Footer = () => {
       <hr className="mx-auto max-w-7xl mt-24" />
       <section className="mx-auto max-w-7xl py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-x-12 gap-y-8">
         <div className="col-span-full xl:col-span-2">
-          <Link
-            rel="noreferrer noopener "
-            href="/"
-            className="ml-2 font-bold text-xl flex text-primary"
-          >
-            <Speech className="mr-2 h-8 w-8" />
-            Speech IQ
+          <Link href="/" className="flex items-center gap-2 font-medium">
+            <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
+              <Speech className="size-6" />
+            </div>
+            Speech IQ.
           </Link>
         </div>
 
