@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build & Lint
+    name: Build & Lint (status check)
     runs-on: ubuntu-latest
 
     steps:
