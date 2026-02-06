@@ -9,7 +9,7 @@ import type { NextRequest } from "next/server";
  * - static files (have a file extension)
  * - common root files like `/favicon.ico`, `/robots.txt`, `/sitemap.xml`
  */
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Allow root
