@@ -27,7 +27,8 @@ export const PlanTier = {
 export type PlanTier = (typeof PlanTier)[keyof typeof PlanTier]
 
 
-export const SessionStatus = {
+export const PracticeSessionStatus = {
+  STARTED: 'STARTED',
   UPLOADED: 'UPLOADED',
   TRANSCRIBING: 'TRANSCRIBING',
   ANALYZING: 'ANALYZING',
@@ -35,7 +36,7 @@ export const SessionStatus = {
   FAILED: 'FAILED'
 } as const
 
-export type SessionStatus = (typeof SessionStatus)[keyof typeof SessionStatus]
+export type PracticeSessionStatus = (typeof PracticeSessionStatus)[keyof typeof PracticeSessionStatus]
 
 
 export const PaymentStatus = {

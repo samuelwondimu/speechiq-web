@@ -1487,16 +1487,16 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'SessionStatus'
+ * Reference to a field of type 'PracticeSessionStatus'
  */
-export type EnumSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionStatus'>
+export type EnumPracticeSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PracticeSessionStatus'>
     
 
 
 /**
- * Reference to a field of type 'SessionStatus[]'
+ * Reference to a field of type 'PracticeSessionStatus[]'
  */
-export type ListEnumSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionStatus[]'>
+export type ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PracticeSessionStatus[]'>
     
 
 

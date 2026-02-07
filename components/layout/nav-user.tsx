@@ -6,7 +6,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "../theme/mode-toggle";
-import { useSession } from "@/lib/auth-client";
+import { useSession, signOut } from "@/lib/auth-client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -39,6 +39,9 @@ export function NavUser() {
           <ModeToggle />
         </SidebarMenuButton>
       </SidebarMenuItem>
+      <SidebarMenuButton onClick={() => signOut()} size="lg" variant="outline">
+        Sign out
+      </SidebarMenuButton>
     </SidebarMenu>
   );
 }

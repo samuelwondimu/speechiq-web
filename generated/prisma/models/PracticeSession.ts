@@ -49,7 +49,7 @@ export type PracticeSessionSumAggregateOutputType = {
 export type PracticeSessionMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  status: $Enums.SessionStatus | null
+  status: $Enums.PracticeSessionStatus | null
   audioUrl: string | null
   durationSeconds: number | null
   transcript: string | null
@@ -69,7 +69,7 @@ export type PracticeSessionMinAggregateOutputType = {
 export type PracticeSessionMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  status: $Enums.SessionStatus | null
+  status: $Enums.PracticeSessionStatus | null
   audioUrl: string | null
   durationSeconds: number | null
   transcript: string | null
@@ -280,7 +280,7 @@ export type PracticeSessionGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type PracticeSessionGroupByOutputType = {
   id: string
   userId: string
-  status: $Enums.SessionStatus
+  status: $Enums.PracticeSessionStatus
   audioUrl: string | null
   durationSeconds: number | null
   transcript: string | null
@@ -324,7 +324,7 @@ export type PracticeSessionWhereInput = {
   NOT?: Prisma.PracticeSessionWhereInput | Prisma.PracticeSessionWhereInput[]
   id?: Prisma.StringFilter<"PracticeSession"> | string
   userId?: Prisma.StringFilter<"PracticeSession"> | string
-  status?: Prisma.EnumSessionStatusFilter<"PracticeSession"> | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFilter<"PracticeSession"> | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.StringNullableFilter<"PracticeSession"> | string | null
   durationSeconds?: Prisma.IntNullableFilter<"PracticeSession"> | number | null
   transcript?: Prisma.StringNullableFilter<"PracticeSession"> | string | null
@@ -373,7 +373,7 @@ export type PracticeSessionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PracticeSessionWhereInput[]
   NOT?: Prisma.PracticeSessionWhereInput | Prisma.PracticeSessionWhereInput[]
   userId?: Prisma.StringFilter<"PracticeSession"> | string
-  status?: Prisma.EnumSessionStatusFilter<"PracticeSession"> | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFilter<"PracticeSession"> | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.StringNullableFilter<"PracticeSession"> | string | null
   durationSeconds?: Prisma.IntNullableFilter<"PracticeSession"> | number | null
   transcript?: Prisma.StringNullableFilter<"PracticeSession"> | string | null
@@ -425,7 +425,7 @@ export type PracticeSessionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PracticeSessionScalarWhereWithAggregatesInput | Prisma.PracticeSessionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PracticeSession"> | string
   userId?: Prisma.StringWithAggregatesFilter<"PracticeSession"> | string
-  status?: Prisma.EnumSessionStatusWithAggregatesFilter<"PracticeSession"> | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusWithAggregatesFilter<"PracticeSession"> | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.StringNullableWithAggregatesFilter<"PracticeSession"> | string | null
   durationSeconds?: Prisma.IntNullableWithAggregatesFilter<"PracticeSession"> | number | null
   transcript?: Prisma.StringNullableWithAggregatesFilter<"PracticeSession"> | string | null
@@ -445,7 +445,7 @@ export type PracticeSessionScalarWhereWithAggregatesInput = {
 
 export type PracticeSessionCreateInput = {
   id?: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -468,7 +468,7 @@ export type PracticeSessionCreateInput = {
 export type PracticeSessionUncheckedCreateInput = {
   id?: string
   userId: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -489,7 +489,7 @@ export type PracticeSessionUncheckedCreateInput = {
 
 export type PracticeSessionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -512,7 +512,7 @@ export type PracticeSessionUpdateInput = {
 export type PracticeSessionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -534,7 +534,7 @@ export type PracticeSessionUncheckedUpdateInput = {
 export type PracticeSessionCreateManyInput = {
   id?: string
   userId: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -554,7 +554,7 @@ export type PracticeSessionCreateManyInput = {
 
 export type PracticeSessionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -575,7 +575,7 @@ export type PracticeSessionUpdateManyMutationInput = {
 export type PracticeSessionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -731,8 +731,8 @@ export type PracticeSessionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.PracticeSessionScalarWhereInput | Prisma.PracticeSessionScalarWhereInput[]
 }
 
-export type EnumSessionStatusFieldUpdateOperationsInput = {
-  set?: $Enums.SessionStatus
+export type EnumPracticeSessionStatusFieldUpdateOperationsInput = {
+  set?: $Enums.PracticeSessionStatus
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -767,7 +767,7 @@ export type PracticeSessionUpdateOneRequiredWithoutAnalysesNestedInput = {
 
 export type PracticeSessionCreateWithoutUserInput = {
   id?: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -788,7 +788,7 @@ export type PracticeSessionCreateWithoutUserInput = {
 
 export type PracticeSessionUncheckedCreateWithoutUserInput = {
   id?: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -839,7 +839,7 @@ export type PracticeSessionScalarWhereInput = {
   NOT?: Prisma.PracticeSessionScalarWhereInput | Prisma.PracticeSessionScalarWhereInput[]
   id?: Prisma.StringFilter<"PracticeSession"> | string
   userId?: Prisma.StringFilter<"PracticeSession"> | string
-  status?: Prisma.EnumSessionStatusFilter<"PracticeSession"> | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFilter<"PracticeSession"> | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.StringNullableFilter<"PracticeSession"> | string | null
   durationSeconds?: Prisma.IntNullableFilter<"PracticeSession"> | number | null
   transcript?: Prisma.StringNullableFilter<"PracticeSession"> | string | null
@@ -859,7 +859,7 @@ export type PracticeSessionScalarWhereInput = {
 
 export type PracticeSessionCreateWithoutAnalysesInput = {
   id?: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -881,7 +881,7 @@ export type PracticeSessionCreateWithoutAnalysesInput = {
 export type PracticeSessionUncheckedCreateWithoutAnalysesInput = {
   id?: string
   userId: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -917,7 +917,7 @@ export type PracticeSessionUpdateToOneWithWhereWithoutAnalysesInput = {
 
 export type PracticeSessionUpdateWithoutAnalysesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -939,7 +939,7 @@ export type PracticeSessionUpdateWithoutAnalysesInput = {
 export type PracticeSessionUncheckedUpdateWithoutAnalysesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -959,7 +959,7 @@ export type PracticeSessionUncheckedUpdateWithoutAnalysesInput = {
 
 export type PracticeSessionCreateManyUserInput = {
   id?: string
-  status?: $Enums.SessionStatus
+  status?: $Enums.PracticeSessionStatus
   audioUrl?: string | null
   durationSeconds?: number | null
   transcript?: string | null
@@ -979,7 +979,7 @@ export type PracticeSessionCreateManyUserInput = {
 
 export type PracticeSessionUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1000,7 +1000,7 @@ export type PracticeSessionUpdateWithoutUserInput = {
 
 export type PracticeSessionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1021,7 +1021,7 @@ export type PracticeSessionUncheckedUpdateWithoutUserInput = {
 
 export type PracticeSessionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSessionStatusFieldUpdateOperationsInput | $Enums.SessionStatus
+  status?: Prisma.EnumPracticeSessionStatusFieldUpdateOperationsInput | $Enums.PracticeSessionStatus
   audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1181,7 +1181,7 @@ export type $PracticeSessionPayload<ExtArgs extends runtime.Types.Extensions.Int
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    status: $Enums.SessionStatus
+    status: $Enums.PracticeSessionStatus
     audioUrl: string | null
     durationSeconds: number | null
     transcript: string | null
@@ -1624,7 +1624,7 @@ export interface Prisma__PracticeSessionClient<T, Null = never, ExtArgs extends 
 export interface PracticeSessionFieldRefs {
   readonly id: Prisma.FieldRef<"PracticeSession", 'String'>
   readonly userId: Prisma.FieldRef<"PracticeSession", 'String'>
-  readonly status: Prisma.FieldRef<"PracticeSession", 'SessionStatus'>
+  readonly status: Prisma.FieldRef<"PracticeSession", 'PracticeSessionStatus'>
   readonly audioUrl: Prisma.FieldRef<"PracticeSession", 'String'>
   readonly durationSeconds: Prisma.FieldRef<"PracticeSession", 'Int'>
   readonly transcript: Prisma.FieldRef<"PracticeSession", 'String'>

@@ -19,7 +19,8 @@ enum PlanTier {
     TEAM
 }
 
-enum SessionStatus {
+enum PracticeSessionStatus {
+    STARTED
     UPLOADED
     TRANSCRIBING
     ANALYZING
@@ -125,7 +126,7 @@ model PracticeSession {
   userId           String
   user             User     @relation(fields: [userId], references: [id])
 
-  status           SessionStatus @default(UPLOADED)
+  status           PracticeSessionStatus @default(UPLOADED)
 
   audioUrl         String?
   durationSeconds  Int?

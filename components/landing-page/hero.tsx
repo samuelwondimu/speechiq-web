@@ -28,7 +28,7 @@ export const Hero = () => {
 
         <div className="flex justify-center lg:justify-start space-y-4 md:space-y-0 md:space-x-4">
           <Button size="xl" className="w-full md:w-1/3">
-            <Link href="/login">Get Started</Link>
+            <Link href="/sign-in">Get Started</Link>
           </Button>
         </div>
       </div>

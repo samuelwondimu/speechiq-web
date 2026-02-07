@@ -226,11 +226,11 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
-export type EnumSessionStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.SessionStatus | Prisma.EnumSessionStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel> | $Enums.SessionStatus
+export type EnumPracticeSessionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PracticeSessionStatus | Prisma.EnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPracticeSessionStatusFilter<$PrismaModel> | $Enums.PracticeSessionStatus
 }
 
 export type IntNullableFilter<$PrismaModel = never> = {
@@ -279,14 +279,14 @@ export type JsonNullableFilterBase<$PrismaModel = never> = {
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
 }
 
-export type EnumSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.SessionStatus | Prisma.EnumSessionStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSessionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SessionStatus
+export type EnumPracticeSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PracticeSessionStatus | Prisma.EnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPracticeSessionStatusWithAggregatesFilter<$PrismaModel> | $Enums.PracticeSessionStatus
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPracticeSessionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPracticeSessionStatusFilter<$PrismaModel>
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -624,11 +624,11 @@ export type NestedFloatFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
 }
 
-export type NestedEnumSessionStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.SessionStatus | Prisma.EnumSessionStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel> | $Enums.SessionStatus
+export type NestedEnumPracticeSessionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PracticeSessionStatus | Prisma.EnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPracticeSessionStatusFilter<$PrismaModel> | $Enums.PracticeSessionStatus
 }
 
 export type NestedFloatNullableFilter<$PrismaModel = never> = {
@@ -642,14 +642,14 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
-export type NestedEnumSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.SessionStatus | Prisma.EnumSessionStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SessionStatus[] | Prisma.ListEnumSessionStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSessionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SessionStatus
+export type NestedEnumPracticeSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PracticeSessionStatus | Prisma.EnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PracticeSessionStatus[] | Prisma.ListEnumPracticeSessionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPracticeSessionStatusWithAggregatesFilter<$PrismaModel> | $Enums.PracticeSessionStatus
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPracticeSessionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPracticeSessionStatusFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {

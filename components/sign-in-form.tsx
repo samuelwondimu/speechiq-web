@@ -10,7 +10,7 @@ import { useForm } from "@tanstack/react-form";
 import { Label } from "./ui/label";
 import { useState } from "react";
 
-export function LoginForm({
+export function SignInForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
