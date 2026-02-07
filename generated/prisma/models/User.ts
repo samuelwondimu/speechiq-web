@@ -34,6 +34,9 @@ export type UserMinAggregateOutputType = {
   updatedAt: Date | null
   role: $Enums.UserRole | null
   planTier: $Enums.PlanTier | null
+  paymentStatus: $Enums.PaymentStatus | null
+  stripeCustomerId: string | null
+  stripeSubId: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -46,6 +49,9 @@ export type UserMaxAggregateOutputType = {
   updatedAt: Date | null
   role: $Enums.UserRole | null
   planTier: $Enums.PlanTier | null
+  paymentStatus: $Enums.PaymentStatus | null
+  stripeCustomerId: string | null
+  stripeSubId: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -58,6 +64,9 @@ export type UserCountAggregateOutputType = {
   updatedAt: number
   role: number
   planTier: number
+  paymentStatus: number
+  stripeCustomerId: number
+  stripeSubId: number
   _all: number
 }
 
@@ -72,6 +81,9 @@ export type UserMinAggregateInputType = {
   updatedAt?: true
   role?: true
   planTier?: true
+  paymentStatus?: true
+  stripeCustomerId?: true
+  stripeSubId?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -84,6 +96,9 @@ export type UserMaxAggregateInputType = {
   updatedAt?: true
   role?: true
   planTier?: true
+  paymentStatus?: true
+  stripeCustomerId?: true
+  stripeSubId?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -96,6 +111,9 @@ export type UserCountAggregateInputType = {
   updatedAt?: true
   role?: true
   planTier?: true
+  paymentStatus?: true
+  stripeCustomerId?: true
+  stripeSubId?: true
   _all?: true
 }
 
@@ -181,6 +199,9 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   role: $Enums.UserRole
   planTier: $Enums.PlanTier
+  paymentStatus: $Enums.PaymentStatus
+  stripeCustomerId: string | null
+  stripeSubId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -214,8 +235,14 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFilter<"User"> | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
+  stripeSubId?: Prisma.StringNullableFilter<"User"> | string | null
   sessions?: Prisma.SessionListRelationFilter
+  practiceSessions?: Prisma.PracticeSessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  usage?: Prisma.XOR<Prisma.UsageNullableScalarRelationFilter, Prisma.UsageWhereInput> | null
+  memberships?: Prisma.TeamMemberListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -228,13 +255,21 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   planTier?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripeSubId?: Prisma.SortOrderInput | Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
+  practiceSessions?: Prisma.PracticeSessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
+  usage?: Prisma.UsageOrderByWithRelationInput
+  memberships?: Prisma.TeamMemberOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  stripeCustomerId?: string
+  stripeSubId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -245,9 +280,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFilter<"User"> | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
   sessions?: Prisma.SessionListRelationFilter
+  practiceSessions?: Prisma.PracticeSessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
-}, "id" | "email">
+  usage?: Prisma.XOR<Prisma.UsageNullableScalarRelationFilter, Prisma.UsageWhereInput> | null
+  memberships?: Prisma.TeamMemberListRelationFilter
+}, "id" | "stripeCustomerId" | "stripeSubId" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -259,6 +298,9 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   planTier?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripeSubId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -277,6 +319,9 @@ export type UserScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierWithAggregatesFilter<"User"> | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusWithAggregatesFilter<"User"> | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  stripeSubId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -289,8 +334,14 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -303,8 +354,14 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageUncheckedCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -317,8 +374,14 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -331,8 +394,14 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUncheckedUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -345,6 +414,9 @@ export type UserCreateManyInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -357,6 +429,9 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -369,6 +444,9 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -381,6 +459,9 @@ export type UserCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   planTier?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrder
+  stripeSubId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -393,6 +474,9 @@ export type UserMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   planTier?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrder
+  stripeSubId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -405,6 +489,9 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   planTier?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  stripeCustomerId?: Prisma.SortOrder
+  stripeSubId?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -436,6 +523,10 @@ export type EnumPlanTierFieldUpdateOperationsInput = {
   set?: $Enums.PlanTier
 }
 
+export type EnumPaymentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.PaymentStatus
+}
+
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -464,6 +555,48 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
+export type UserCreateNestedOneWithoutUsageInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUsageInput, Prisma.UserUncheckedCreateWithoutUsageInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUsageInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUsageNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUsageInput, Prisma.UserUncheckedCreateWithoutUsageInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUsageInput
+  upsert?: Prisma.UserUpsertWithoutUsageInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUsageInput, Prisma.UserUpdateWithoutUsageInput>, Prisma.UserUncheckedUpdateWithoutUsageInput>
+}
+
+export type UserCreateNestedOneWithoutPracticeSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPracticeSessionsInput, Prisma.UserUncheckedCreateWithoutPracticeSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPracticeSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPracticeSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPracticeSessionsInput, Prisma.UserUncheckedCreateWithoutPracticeSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPracticeSessionsInput
+  upsert?: Prisma.UserUpsertWithoutPracticeSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPracticeSessionsInput, Prisma.UserUpdateWithoutPracticeSessionsInput>, Prisma.UserUncheckedUpdateWithoutPracticeSessionsInput>
+}
+
+export type UserCreateNestedOneWithoutMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMembershipsInput, Prisma.UserUncheckedCreateWithoutMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMembershipsInput, Prisma.UserUncheckedCreateWithoutMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMembershipsInput, Prisma.UserUpdateWithoutMembershipsInput>, Prisma.UserUncheckedUpdateWithoutMembershipsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -474,7 +607,13 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  practiceSessions?: Prisma.PracticeSessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -487,7 +626,13 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  practiceSessions?: Prisma.PracticeSessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageUncheckedCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -516,7 +661,13 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  practiceSessions?: Prisma.PracticeSessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -529,7 +680,13 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  practiceSessions?: Prisma.PracticeSessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUncheckedUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -542,7 +699,13 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -555,7 +718,13 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   role?: $Enums.UserRole
   planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageUncheckedCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -584,7 +753,13 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -597,7 +772,289 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUncheckedUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUsageInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  memberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUsageInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUsageInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUsageInput, Prisma.UserUncheckedCreateWithoutUsageInput>
+}
+
+export type UserUpsertWithoutUsageInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUsageInput, Prisma.UserUncheckedUpdateWithoutUsageInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUsageInput, Prisma.UserUncheckedCreateWithoutUsageInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUsageInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUsageInput, Prisma.UserUncheckedUpdateWithoutUsageInput>
+}
+
+export type UserUpdateWithoutUsageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUsageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPracticeSessionsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPracticeSessionsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageUncheckedCreateNestedOneWithoutUserInput
+  memberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPracticeSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPracticeSessionsInput, Prisma.UserUncheckedCreateWithoutPracticeSessionsInput>
+}
+
+export type UserUpsertWithoutPracticeSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPracticeSessionsInput, Prisma.UserUncheckedUpdateWithoutPracticeSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPracticeSessionsInput, Prisma.UserUncheckedCreateWithoutPracticeSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPracticeSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPracticeSessionsInput, Prisma.UserUncheckedUpdateWithoutPracticeSessionsInput>
+}
+
+export type UserUpdateWithoutPracticeSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPracticeSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUncheckedUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMembershipsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMembershipsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.UserRole
+  planTier?: $Enums.PlanTier
+  paymentStatus?: $Enums.PaymentStatus
+  stripeCustomerId?: string | null
+  stripeSubId?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  usage?: Prisma.UsageUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMembershipsInput, Prisma.UserUncheckedCreateWithoutMembershipsInput>
+}
+
+export type UserUpsertWithoutMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMembershipsInput, Prisma.UserUncheckedUpdateWithoutMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMembershipsInput, Prisma.UserUncheckedCreateWithoutMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMembershipsInput, Prisma.UserUncheckedUpdateWithoutMembershipsInput>
+}
+
+export type UserUpdateWithoutMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  planTier?: Prisma.EnumPlanTierFieldUpdateOperationsInput | $Enums.PlanTier
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  practiceSessions?: Prisma.PracticeSessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  usage?: Prisma.UsageUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -607,12 +1064,16 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 
 export type UserCountOutputType = {
   sessions: number
+  practiceSessions: number
   accounts: number
+  memberships: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  practiceSessions?: boolean | UserCountOutputTypeCountPracticeSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
 }
 
 /**
@@ -635,8 +1096,22 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountPracticeSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PracticeSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AccountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamMemberWhereInput
 }
 
 
@@ -650,8 +1125,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   role?: boolean
   planTier?: boolean
+  paymentStatus?: boolean
+  stripeCustomerId?: boolean
+  stripeSubId?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  practiceSessions?: boolean | Prisma.User$practiceSessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  usage?: boolean | Prisma.User$usageArgs<ExtArgs>
+  memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -665,6 +1146,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   role?: boolean
   planTier?: boolean
+  paymentStatus?: boolean
+  stripeCustomerId?: boolean
+  stripeSubId?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -677,6 +1161,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   role?: boolean
   planTier?: boolean
+  paymentStatus?: boolean
+  stripeCustomerId?: boolean
+  stripeSubId?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -689,12 +1176,18 @@ export type UserSelectScalar = {
   updatedAt?: boolean
   role?: boolean
   planTier?: boolean
+  paymentStatus?: boolean
+  stripeCustomerId?: boolean
+  stripeSubId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "role" | "planTier", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "role" | "planTier" | "paymentStatus" | "stripeCustomerId" | "stripeSubId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  practiceSessions?: boolean | Prisma.User$practiceSessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  usage?: boolean | Prisma.User$usageArgs<ExtArgs>
+  memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -704,7 +1197,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[]
+    practiceSessions: Prisma.$PracticeSessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
+    usage: Prisma.$UsagePayload<ExtArgs> | null
+    memberships: Prisma.$TeamMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -716,6 +1212,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     role: $Enums.UserRole
     planTier: $Enums.PlanTier
+    paymentStatus: $Enums.PaymentStatus
+    stripeCustomerId: string | null
+    stripeSubId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1111,7 +1610,10 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  practiceSessions<T extends Prisma.User$practiceSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$practiceSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PracticeSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  usage<T extends Prisma.User$usageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$usageArgs<ExtArgs>>): Prisma.Prisma__UsageClient<runtime.Types.Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1150,6 +1652,9 @@ export interface UserFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly planTier: Prisma.FieldRef<"User", 'PlanTier'>
+  readonly paymentStatus: Prisma.FieldRef<"User", 'PaymentStatus'>
+  readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
+  readonly stripeSubId: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -1562,6 +2067,30 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.practiceSessions
+ */
+export type User$practiceSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PracticeSession
+   */
+  select?: Prisma.PracticeSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PracticeSession
+   */
+  omit?: Prisma.PracticeSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PracticeSessionInclude<ExtArgs> | null
+  where?: Prisma.PracticeSessionWhereInput
+  orderBy?: Prisma.PracticeSessionOrderByWithRelationInput | Prisma.PracticeSessionOrderByWithRelationInput[]
+  cursor?: Prisma.PracticeSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PracticeSessionScalarFieldEnum | Prisma.PracticeSessionScalarFieldEnum[]
+}
+
+/**
  * User.accounts
  */
 export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1583,6 +2112,49 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.usage
+ */
+export type User$usageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Usage
+   */
+  select?: Prisma.UsageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Usage
+   */
+  omit?: Prisma.UsageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UsageInclude<ExtArgs> | null
+  where?: Prisma.UsageWhereInput
+}
+
+/**
+ * User.memberships
+ */
+export type User$membershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamMember
+   */
+  select?: Prisma.TeamMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamMember
+   */
+  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamMemberInclude<ExtArgs> | null
+  where?: Prisma.TeamMemberWhereInput
+  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
+  cursor?: Prisma.TeamMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
 }
 
 /**

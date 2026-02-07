@@ -59,3 +59,33 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Usage
+ * 
+ */
+export type Usage = Prisma.UsageModel
+/**
+ * Model PracticeSession
+ * 
+ */
+export type PracticeSession = Prisma.PracticeSessionModel
+/**
+ * Model Analysis
+ * 
+ */
+export type Analysis = Prisma.AnalysisModel
+/**
+ * Model Team
+ * 
+ */
+export type Team = Prisma.TeamModel
+/**
+ * Model TeamMember
+ * 
+ */
+export type TeamMember = Prisma.TeamMemberModel
+/**
+ * Model WebhookEvent
+ * 
+ */
+export type WebhookEvent = Prisma.WebhookEventModel

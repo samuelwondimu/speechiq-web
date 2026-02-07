@@ -54,7 +54,13 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Usage: 'Usage',
+  PracticeSession: 'PracticeSession',
+  Analysis: 'Analysis',
+  Team: 'Team',
+  TeamMember: 'TeamMember',
+  WebhookEvent: 'WebhookEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -82,7 +88,10 @@ export const UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   role: 'role',
-  planTier: 'planTier'
+  planTier: 'planTier',
+  paymentStatus: 'paymentStatus',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubId: 'stripeSubId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -133,12 +142,113 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const UsageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  minutesUsed: 'minutesUsed',
+  sessionsUsed: 'sessionsUsed',
+  resetAt: 'resetAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UsageScalarFieldEnum = (typeof UsageScalarFieldEnum)[keyof typeof UsageScalarFieldEnum]
+
+
+export const PracticeSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  audioUrl: 'audioUrl',
+  durationSeconds: 'durationSeconds',
+  transcript: 'transcript',
+  transcriptLang: 'transcriptLang',
+  wordsPerMinute: 'wordsPerMinute',
+  fillerCount: 'fillerCount',
+  pauseCount: 'pauseCount',
+  clarityScore: 'clarityScore',
+  confidenceScore: 'confidenceScore',
+  feedbackJson: 'feedbackJson',
+  aiModel: 'aiModel',
+  aiCostCents: 'aiCostCents',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt',
+  completedAt: 'completedAt'
+} as const
+
+export type PracticeSessionScalarFieldEnum = (typeof PracticeSessionScalarFieldEnum)[keyof typeof PracticeSessionScalarFieldEnum]
+
+
+export const AnalysisScalarFieldEnum = {
+  id: 'id',
+  practiceSessionId: 'practiceSessionId',
+  promptVersion: 'promptVersion',
+  modelUsed: 'modelUsed',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  costCents: 'costCents',
+  result: 'result',
+  success: 'success',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt'
+} as const
+
+export type AnalysisScalarFieldEnum = (typeof AnalysisScalarFieldEnum)[keyof typeof AnalysisScalarFieldEnum]
+
+
+export const TeamScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubId: 'stripeSubId',
+  createdAt: 'createdAt'
+} as const
+
+export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
+
+
+export const TeamMemberScalarFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  userId: 'userId',
+  role: 'role'
+} as const
+
+export type TeamMemberScalarFieldEnum = (typeof TeamMemberScalarFieldEnum)[keyof typeof TeamMemberScalarFieldEnum]
+
+
+export const WebhookEventScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  processed: 'processed',
+  payload: 'payload',
+  receivedAt: 'receivedAt'
+} as const
+
+export type WebhookEventScalarFieldEnum = (typeof WebhookEventScalarFieldEnum)[keyof typeof WebhookEventScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -155,4 +265,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

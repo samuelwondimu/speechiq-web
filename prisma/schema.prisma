@@ -42,10 +42,17 @@ model User {
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
     role          UserRole  @default(USER)
-    planTier      PlanTier  @default(FREE)
-    sessions      Session[]
-    accounts      Account[]
 
+    sessions      Session[]
+    practiceSessions PracticeSession[]
+    accounts      Account[]
+    planTier         PlanTier @default(FREE)
+    paymentStatus    PaymentStatus @default(ACTIVE)
+    usage           Usage?
+
+    stripeCustomerId String?  @unique
+    stripeSubId      String?  @unique
+    memberships      TeamMember[]
     @@unique([email])
     @@map("user")
 }
@@ -96,4 +103,107 @@ model Verification {
 
     @@index([identifier])
     @@map("verification")
+}
+
+
+model Usage {
+  id               String @id @default(cuid())
+  userId           String @unique
+  user             User   @relation(fields: [userId], references: [id])
+
+  minutesUsed      Int    @default(0)
+  sessionsUsed     Int    @default(0)
+
+  resetAt          DateTime
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model PracticeSession {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+
+  status           SessionStatus @default(UPLOADED)
+
+  audioUrl         String?
+  durationSeconds  Int?
+
+  transcript       String?
+  transcriptLang   String?
+
+  wordsPerMinute   Int?
+  fillerCount      Int?
+  pauseCount       Int?
+
+  clarityScore     Float?
+  confidenceScore  Float?
+
+  feedbackJson     Json?
+  aiModel          String?
+  aiCostCents      Int?
+
+  errorMessage     String?
+
+  createdAt        DateTime @default(now())
+  completedAt      DateTime?
+
+  analyses         Analysis[]
+
+  @@index([userId, createdAt])
+}
+
+model Analysis {
+  id               String   @id @default(cuid())
+  practiceSessionId        String
+  practiceSession          PracticeSession  @relation(fields: [practiceSessionId], references: [id])
+
+  promptVersion    String
+  modelUsed        String
+
+  inputTokens      Int
+  outputTokens     Int
+  costCents        Int
+
+  result           Json
+  success          Boolean  @default(true)
+  errorMessage     String?
+
+  createdAt        DateTime @default(now())
+
+  @@index([practiceSessionId])
+  
+}
+
+model Team {
+  id               String @id @default(cuid())
+  name             String
+
+  stripeCustomerId String?
+  stripeSubId      String?
+
+  members          TeamMember[]
+
+  createdAt        DateTime @default(now())
+}
+
+model TeamMember {
+  id        String @id @default(cuid())
+  teamId   String
+  userId   String
+  role     UserRole @default(USER)
+
+  team     Team @relation(fields: [teamId], references: [id])
+  user     User @relation(fields: [userId], references: [id])
+
+  @@unique([teamId, userId])
+}
+
+model WebhookEvent {
+  id            String   @id
+  provider      String
+  processed     Boolean  @default(false)
+  payload       Json
+  receivedAt    DateTime @default(now())
 }
