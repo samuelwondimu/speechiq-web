@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 type RecorderContext = {
   start: () => Promise<void>;
@@ -43,13 +37,6 @@ export function AudioRecorderProvider({
   const [permissionError, setPermissionError] = useState<string | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [lastBlob, setLastBlob] = useState<Blob | null>(null);
-
-  useEffect(() => {
-    return () => {
-      stopEverything();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   async function start() {
     if (isRecording) return;
@@ -210,7 +197,7 @@ export function AudioRecorderProvider({
         )._cleanupInterval as (() => void) | undefined;
         if (cleanup) cleanup();
       } catch (e) {
-        // ignore
+        console.warn("Error during cleanup:", e);
       }
     }
 
@@ -232,7 +219,7 @@ export function AudioRecorderProvider({
       try {
         mediaRecorderRef.current.stop();
       } catch (e) {
-        // ignore
+        console.warn("Error stopping media recorder:", e);
       }
     }
 
@@ -248,7 +235,7 @@ export function AudioRecorderProvider({
       try {
         audioCtxRef.current.close();
       } catch (e) {
-        // ignore
+        console.warn("Error closing audio context:", e);
       }
       audioCtxRef.current = null;
     }
@@ -257,6 +244,12 @@ export function AudioRecorderProvider({
   function registerCanvas(el: HTMLCanvasElement | null) {
     canvasRef.current = el;
   }
+
+  useEffect(() => {
+    return () => {
+      stopEverything();
+    };
+  }, []);
 
   const value: RecorderContext = {
     start,
