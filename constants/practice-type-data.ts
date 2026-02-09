@@ -5,6 +5,12 @@ export const practiceTypeData = [
       "Practice your speech and receive feedback on your performance.",
     value: "speech-practice",
   },
+  {
+    name: "Q&A Practice",
+    description:
+      "Practice answering common interview questions and get feedback on your responses.",
+    value: "qa-practice",
+  },
 ];
 
 export const questions = [
