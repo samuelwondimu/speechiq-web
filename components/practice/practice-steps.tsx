@@ -1,51 +1,84 @@
 "use client";
 
 import { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { AudioRecorderProvider } from "./audio-recoder";
+
+import { masterSchema, PracticeFormValues } from "@/lib/practice-form";
+
 import StepRecord from "./step-record";
 import PracticeSetup from "./practice-setup";
 import PracticeAnalysisStep from "./practice-analysis-step";
 import PracticeReportStep from "./practice-report-step";
 import { PracticeTabs } from "@/constants/practice-type-data";
+import { MicrophoneContextProvider } from "@/context/MicrophoneContextProvider";
 
 export function PracticeSteps() {
   const [activeTab, setActiveTab] = useState<PracticeTabs>(
     PracticeTabs.PracticeSetup,
   );
 
-  const tabs = [
-    {
-      value: PracticeTabs.PracticeSetup,
-      label: "Practice Setup",
-      component: <PracticeSetup setTab={setActiveTab} />,
+  const methods = useForm<PracticeFormValues>({
+    resolver: zodResolver(masterSchema),
+    defaultValues: {
+      practiceType: undefined,
+      audioBlob: undefined,
+      transcript: "",
+      revTranscript: undefined,
     },
-    {
-      value: PracticeTabs.Recording,
-      label: "Recording",
-      component: <StepRecord setTab={setActiveTab} />,
-    },
-    {
-      value: PracticeTabs.Analysis,
-      label: "Analysis",
-      component: <PracticeAnalysisStep setTab={setActiveTab} />,
-    },
-    {
-      value: PracticeTabs.Report,
-      label: "Report",
-      component: <PracticeReportStep />,
-    },
-  ];
+  });
+
+  const { handleSubmit, trigger } = methods;
+
+  const handleNextStep = async (nextTab: PracticeTabs) => {
+    let isValid = false;
+
+    if (activeTab === PracticeTabs.PracticeSetup) {
+      isValid = await trigger(["practiceType"]);
+    } else if (activeTab === PracticeTabs.Recording) {
+      isValid = await trigger(["audioBlob"]);
+    } else {
+      isValid = true;
+    }
+
+    if (isValid) setActiveTab(nextTab);
+  };
+
+  const onSubmit = (data: PracticeFormValues) => {
+    console.log("Final Submission Data:", data);
+  };
 
   return (
-    <AudioRecorderProvider onRecordingComplete={(blob) => console.log(blob)}>
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        {tabs.map((tab) => (
-          <TabsContent key={tab.value} value={tab.value}>
-            {tab.component}
-          </TabsContent>
-        ))}
-      </Tabs>
-    </AudioRecorderProvider>
+    <MicrophoneContextProvider>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Tabs value={activeTab} className="w-full">
+            <TabsContent value={PracticeTabs.PracticeSetup}>
+              <PracticeSetup
+                onNext={() => handleNextStep(PracticeTabs.Recording)}
+              />
+            </TabsContent>
+
+            <TabsContent value={PracticeTabs.Recording}>
+              <StepRecord
+                onNext={() => handleNextStep(PracticeTabs.Analysis)}
+                onBack={() => setActiveTab(PracticeTabs.PracticeSetup)}
+              />
+            </TabsContent>
+
+            <TabsContent value={PracticeTabs.Analysis}>
+              <PracticeAnalysisStep
+                onNext={() => handleNextStep(PracticeTabs.Report)}
+              />
+            </TabsContent>
+
+            <TabsContent value={PracticeTabs.Report}>
+              <PracticeReportStep />
+            </TabsContent>
+          </Tabs>
+        </form>
+      </FormProvider>
+    </MicrophoneContextProvider>
   );
 }
