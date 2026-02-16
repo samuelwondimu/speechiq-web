@@ -112,7 +112,7 @@ model Usage {
   userId           String @unique
   user             User   @relation(fields: [userId], references: [id])
 
-  minutesUsed      Int    @default(0)
+  minutesUsed      Float  @default(0)
   sessionsUsed     Int    @default(0)
 
   resetAt          DateTime

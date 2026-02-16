@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import {
   AlertTriangle,
   Brain,
@@ -27,58 +27,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-
-// Example of feedbackJson structure from API
-const feedbackJson = {
-  summary:
-    "Your speech was clear and well-paced. You used minimal filler words and maintained a confident tone throughout.",
-  strengths: [
-    "Clarity: You articulated each word distinctly, making it easy to understand.",
-    "Confidence: Your voice sounded strong and steady, which engages the listener.",
-    "Pacing: You maintained a consistent rhythm, avoiding rushing or long pauses.",
-  ],
-  improvements: [
-    "Filler words: Try to reduce 'um' and 'uh' when thinking of your next point.",
-    "Pauses: Some short pauses were slightly long; practice pausing strategically.",
-    "Sentence endings: Consider using more varied intonation to emphasize key points.",
-  ],
-  exercises: [
-    {
-      title: "Filler Word Reduction",
-      description:
-        "Record yourself reading a short paragraph aloud, aiming to avoid 'um' and 'uh'. Review and repeat.",
-      type: "recording_practice",
-      targetMetric: {
-        fillerCount: 0,
-      },
-    },
-    {
-      title: "Pacing Drill",
-      description:
-        "Read a passage using a metronome at 120 WPM to train consistent pacing.",
-      type: "timed_practice",
-      targetMetric: {
-        wordsPerMinute: 120,
-      },
-    },
-  ],
-  metricsSummary: {
-    wordsPerMinute: 145,
-    fillerCount: 6,
-    pauseCount: 12,
-    clarityScore: 7.4,
-    confidenceScore: 6.8,
-    paceScore: 8.2,
-  },
-  aiModel: "gpt-4o-mini",
-  aiCostCents: 3,
-  generatedAt: "2026-02-09T14:35:00Z",
-};
-
-const formatMetricKey = (key: string) =>
-  key
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/^./, (char) => char.toUpperCase());
+import { useFormContext } from "react-hook-form";
+import { PracticeFormValues } from "@/lib/practice-form";
+import LottieWave from "../lottie-wave";
 
 function MetricCard({
   label,
@@ -110,8 +61,43 @@ function MetricCard({
 }
 
 export default function PracticeReportStep() {
-  const generatedAt = new Date(feedbackJson.generatedAt);
-  const metrics = feedbackJson.metricsSummary;
+  const { setValue, watch } = useFormContext<PracticeFormValues>();
+  const revTranscript = watch("revTranscript");
+  const transcriptAnalyzed = watch("transcriptAnalyzed");
+  const feedbackJson = watch("speechFeedback");
+
+  useEffect(() => {
+    const runAnalysis = async () => {
+      if (!revTranscript || !transcriptAnalyzed) return;
+
+      const response = await fetch("/api/analyze/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ metrics: transcriptAnalyzed }),
+      });
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+      setValue("speechFeedback", data, { shouldValidate: false });
+    };
+    void runAnalysis();
+  }, [revTranscript, transcriptAnalyzed, setValue]);
+
+  if (!feedbackJson) {
+    return (
+      <Card>
+        <CardHeader className="border-b">
+          <h1 className="text-3xl font-bold text-foreground">
+            Generating your practice report...
+          </h1>
+        </CardHeader>
+        {/* <CardContent className="w-full h-64 flex items-center justify-center">
+          <LottieWave />
+        </CardContent> */}
+      </Card>
+    );
+  }
 
   return (
     <Card className="shadow-sm">
@@ -123,7 +109,7 @@ export default function PracticeReportStep() {
                 <Sparkles className="size-3" /> AI Report
               </Badge>
               <Badge variant="outline" className="gap-1">
-                <Brain className="size-3" /> {feedbackJson.aiModel}
+                <Brain className="size-3" />
               </Badge>
             </div>
             <h1 className="text-xl font-bold text-foreground mt-4">
@@ -133,13 +119,6 @@ export default function PracticeReportStep() {
           <div className="flex flex-wrap items-center gap-2 text-xs">
             <Badge variant="outline" className="gap-1">
               <Clock className="size-3" />
-              {generatedAt.toLocaleString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-                hour: "numeric",
-                minute: "2-digit",
-              })}
             </Badge>
           </div>
         </div>
@@ -166,25 +145,25 @@ export default function PracticeReportStep() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
             <MetricCard
               label="Words per minute"
-              value={`${metrics.wordsPerMinute} wpm`}
+              value={`${transcriptAnalyzed?.wordsPerMinute} wpm`}
               icon={<Gauge className="size-4" />}
               helper="Target range: 120 - 160 wpm"
             />
             <MetricCard
               label="Filler words"
-              value={metrics.fillerCount}
+              value={transcriptAnalyzed?.fillerWordCount ?? 0}
               icon={<Mic2 className="size-4" />}
               helper="Lower is better"
             />
             <MetricCard
               label="Pauses"
-              value={metrics.pauseCount}
+              value={transcriptAnalyzed?.pauseCount ?? 0}
               icon={<PauseCircle className="size-4" />}
               helper="Aim for intentional breaks"
             />
             <MetricCard
               label="Pace score"
-              value={`${metrics.paceScore.toFixed(1)} / 10`}
+              value={`${transcriptAnalyzed?.paceScore.toFixed(1)} / 10`}
               icon={<Clock className="size-4" />}
               helper="Smooth rhythm and tempo"
             />
@@ -240,15 +219,15 @@ export default function PracticeReportStep() {
             {[
               {
                 label: "Clarity",
-                value: metrics.clarityScore,
+                value: transcriptAnalyzed?.clarityScore ?? 0,
               },
               {
                 label: "Confidence",
-                value: metrics.confidenceScore,
+                value: transcriptAnalyzed?.confidenceScore ?? 0,
               },
               {
                 label: "Pace",
-                value: metrics.paceScore,
+                value: transcriptAnalyzed?.paceScore ?? 0,
               },
             ].map((item, index) => (
               <MetricCard
@@ -279,30 +258,18 @@ export default function PracticeReportStep() {
           <Card>
             <CardContent>
               <Accordion>
-                {feedbackJson.exercises.map((exercise) => (
+                {feedbackJson.practiceExercises.map((exercise) => (
                   <AccordionItem key={exercise.title} value={exercise.title}>
                     <AccordionTrigger className="text-sm">
                       <div className="flex flex-1 flex-wrap items-center gap-2">
                         <span className="font-medium text-foreground">
                           {exercise.title}
                         </span>
-                        <Badge variant="secondary" className="uppercase">
-                          {exercise.type.replace(/_/g, " ")}
-                        </Badge>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-3 text-sm text-muted-foreground">
-                        <p>{exercise.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {Object.entries(exercise.targetMetric).map(
-                            ([key, value]) => (
-                              <Badge key={key} variant="outline">
-                                {formatMetricKey(key)}: {value}
-                              </Badge>
-                            ),
-                          )}
-                        </div>
+                        <p>{exercise.instructions}</p>
                       </div>
                     </AccordionContent>
                   </AccordionItem>

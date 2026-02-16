@@ -21,6 +21,7 @@ function RecordingStatus() {
 
   useEffect(() => {
     setupMicrophone();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

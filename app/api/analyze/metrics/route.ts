@@ -1,3 +1,5 @@
+// app/api/analyze/metrics/route.ts
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -23,20 +25,17 @@ const FILLER_WORDS = new Set([
   "uh",
   "erm",
   "like",
-  "ah",
   "you know",
+  "ah",
 ]);
 
-export async function POST(request: Request) {
-  const body = await request.json();
-
-  const transcript: RevTranscript | undefined = body?.transcript;
+export async function POST(req: Request) {
+  const { transcript } = (await req.json()) as { transcript: RevTranscript };
 
   if (!transcript) {
-    return new Response(
-      JSON.stringify({ error: "Missing transcript" }),
-      { status: 400 }
-    );
+    return new Response(JSON.stringify({ error: "Missing transcript" }), {
+      status: 400,
+    });
   }
 
   const words: RevWord[] = [];
@@ -45,8 +44,8 @@ export async function POST(request: Request) {
   let startTime = Infinity;
   let endTime = 0;
 
-  for (const monologue of transcript.monologues ?? []) {
-    for (const el of monologue.elements ?? []) {
+  for (const m of transcript.monologues ?? []) {
+    for (const el of m.elements ?? []) {
       if (el.type === "text") {
         words.push(el);
         startTime = Math.min(startTime, el.ts);
@@ -63,47 +62,68 @@ export async function POST(request: Request) {
     startTime < Infinity ? endTime - startTime : 0;
 
   const wordCount = words.length;
-  const minutes = durationSeconds > 0 ? durationSeconds / 60 : 0;
-  const wordsPerMinute =
-    minutes > 0 ? Math.round(wordCount / minutes) : 0;
-
-  // Pause detection (>= 0.8s)
-  let pauseCount = 0;
-  for (let i = 1; i < words.length; i++) {
-    const gap = words[i].ts - words[i - 1].end_ts;
-    if (gap >= 0.8) pauseCount++;
-  }
-
-  // Clarity score (based on avg word confidence)
-  const avgConfidence =
-    wordCount > 0
-      ? words.reduce((sum, w) => sum + w.confidence, 0) / wordCount
+  const wpm =
+    durationSeconds > 0
+      ? Math.round((wordCount / durationSeconds) * 60)
       : 0;
 
-  const clarityScore = Math.min(
-    10,
-    Math.round(avgConfidence * 10 * 10) / 10
+  // ---------------------------
+  // PAUSE DETECTION (ADVANCED)
+  // ---------------------------
+  let pauseCount = 0;
+  let longPauses = 0;
+
+  for (let i = 1; i < words.length; i++) {
+    const gap = words[i].ts - words[i - 1].end_ts;
+
+    if (gap >= 0.6) pauseCount++;
+    if (gap >= 1.2) longPauses++;
+  }
+
+  // ---------------------------
+  // CLARITY SCORE
+  // ---------------------------
+  const avgWordConfidence =
+    words.reduce((s, w) => s + w.confidence, 0) / Math.max(1, wordCount);
+
+  const fillerPenalty = Math.min(0.15, fillerWords.length * 0.03);
+  const clarityScore = Number(
+    ((avgWordConfidence * (1 - fillerPenalty)) * 10).toFixed(1)
   );
 
-  // Confidence score (fillers + pauses)
-  let confidenceScore = 10;
-  confidenceScore -= Math.min(4, fillerWords.length * 0.5);
-  confidenceScore -= Math.min(4, pauseCount * 0.5);
-  confidenceScore = Math.max(0, Math.round(confidenceScore * 10) / 10);
-
-  // Pace score
+  // ---------------------------
+  // PACE SCORE (CURVE-BASED)
+  // ---------------------------
   let paceScore = 10;
-  if (wordsPerMinute < 90) paceScore -= 3;
-  else if (wordsPerMinute > 170) paceScore -= 2;
-  paceScore = Math.max(0, paceScore);
+  if (wpm < 110) paceScore -= (110 - wpm) * 0.05;
+  if (wpm > 160) paceScore -= (wpm - 160) * 0.04;
+  paceScore = Math.max(0, Number(paceScore.toFixed(1)));
+
+  // ---------------------------
+  // CONFIDENCE SCORE (DECAY MODEL)
+  // ---------------------------
+  let confidenceScore = 10;
+
+  confidenceScore -= fillerWords.length * 0.6;
+  confidenceScore -= longPauses * 0.8;
+
+  // Ending hesitation penalty
+  const lastQuarterIndex = Math.floor(words.length * 0.75);
+  const lateFillers = words
+    .slice(lastQuarterIndex)
+    .filter(w => FILLER_WORDS.has(w.value.toLowerCase())).length;
+
+  confidenceScore -= lateFillers * 0.8;
+
+  confidenceScore = Math.max(0, Number(confidenceScore.toFixed(1)));
 
   const transcriptText = words.map(w => w.value).join(" ");
 
   return new Response(
     JSON.stringify({
       transcriptText,
-      durationSeconds: Math.round(durationSeconds * 100) / 100,
-      wordsPerMinute,
+      durationSeconds: Number(durationSeconds.toFixed(2)),
+      wordsPerMinute: wpm,
       fillerWordCount: fillerWords.length,
       fillerWords,
       pauseCount,
@@ -111,9 +131,6 @@ export async function POST(request: Request) {
       confidenceScore,
       paceScore,
     }),
-    {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    }
+    { headers: { "Content-Type": "application/json" } }
   );
 }

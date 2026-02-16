@@ -231,7 +231,7 @@ export type UsageWhereInput = {
   NOT?: Prisma.UsageWhereInput | Prisma.UsageWhereInput[]
   id?: Prisma.StringFilter<"Usage"> | string
   userId?: Prisma.StringFilter<"Usage"> | string
-  minutesUsed?: Prisma.IntFilter<"Usage"> | number
+  minutesUsed?: Prisma.FloatFilter<"Usage"> | number
   sessionsUsed?: Prisma.IntFilter<"Usage"> | number
   resetAt?: Prisma.DateTimeFilter<"Usage"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Usage"> | Date | string
@@ -256,7 +256,7 @@ export type UsageWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UsageWhereInput | Prisma.UsageWhereInput[]
   OR?: Prisma.UsageWhereInput[]
   NOT?: Prisma.UsageWhereInput | Prisma.UsageWhereInput[]
-  minutesUsed?: Prisma.IntFilter<"Usage"> | number
+  minutesUsed?: Prisma.FloatFilter<"Usage"> | number
   sessionsUsed?: Prisma.IntFilter<"Usage"> | number
   resetAt?: Prisma.DateTimeFilter<"Usage"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Usage"> | Date | string
@@ -285,7 +285,7 @@ export type UsageScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UsageScalarWhereWithAggregatesInput | Prisma.UsageScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Usage"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Usage"> | string
-  minutesUsed?: Prisma.IntWithAggregatesFilter<"Usage"> | number
+  minutesUsed?: Prisma.FloatWithAggregatesFilter<"Usage"> | number
   sessionsUsed?: Prisma.IntWithAggregatesFilter<"Usage"> | number
   resetAt?: Prisma.DateTimeWithAggregatesFilter<"Usage"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Usage"> | Date | string
@@ -314,7 +314,7 @@ export type UsageUncheckedCreateInput = {
 
 export type UsageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  minutesUsed?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesUsed?: Prisma.FloatFieldUpdateOperationsInput | number
   sessionsUsed?: Prisma.IntFieldUpdateOperationsInput | number
   resetAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -325,7 +325,7 @@ export type UsageUpdateInput = {
 export type UsageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  minutesUsed?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesUsed?: Prisma.FloatFieldUpdateOperationsInput | number
   sessionsUsed?: Prisma.IntFieldUpdateOperationsInput | number
   resetAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -344,7 +344,7 @@ export type UsageCreateManyInput = {
 
 export type UsageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  minutesUsed?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesUsed?: Prisma.FloatFieldUpdateOperationsInput | number
   sessionsUsed?: Prisma.IntFieldUpdateOperationsInput | number
   resetAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -354,7 +354,7 @@ export type UsageUpdateManyMutationInput = {
 export type UsageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  minutesUsed?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesUsed?: Prisma.FloatFieldUpdateOperationsInput | number
   sessionsUsed?: Prisma.IntFieldUpdateOperationsInput | number
   resetAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -438,6 +438,14 @@ export type UsageUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsageUpdateToOneWithWhereWithoutUserInput, Prisma.UsageUpdateWithoutUserInput>, Prisma.UsageUncheckedUpdateWithoutUserInput>
 }
 
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -482,7 +490,7 @@ export type UsageUpdateToOneWithWhereWithoutUserInput = {
 
 export type UsageUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  minutesUsed?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesUsed?: Prisma.FloatFieldUpdateOperationsInput | number
   sessionsUsed?: Prisma.IntFieldUpdateOperationsInput | number
   resetAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -491,7 +499,7 @@ export type UsageUpdateWithoutUserInput = {
 
 export type UsageUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  minutesUsed?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesUsed?: Prisma.FloatFieldUpdateOperationsInput | number
   sessionsUsed?: Prisma.IntFieldUpdateOperationsInput | number
   resetAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -993,7 +1001,7 @@ export interface Prisma__UsageClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface UsageFieldRefs {
   readonly id: Prisma.FieldRef<"Usage", 'String'>
   readonly userId: Prisma.FieldRef<"Usage", 'String'>
-  readonly minutesUsed: Prisma.FieldRef<"Usage", 'Int'>
+  readonly minutesUsed: Prisma.FieldRef<"Usage", 'Float'>
   readonly sessionsUsed: Prisma.FieldRef<"Usage", 'Int'>
   readonly resetAt: Prisma.FieldRef<"Usage", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Usage", 'DateTime'>

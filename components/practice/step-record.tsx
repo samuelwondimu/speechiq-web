@@ -44,6 +44,7 @@ export default function StepRecord({ onNext, onBack }: StepRecordProps) {
   const [statusText, setStatusText] = useState<string>("");
   const chunksRef = useRef<BlobPart[]>([]);
   const isTranscribingRef = useRef<boolean>(false);
+  const startTimeRef = useRef<number | null>(null);
 
   const { microphone, startMicrophone, stopMicrophone, microphoneState } =
     useMicrophone();
@@ -54,6 +55,7 @@ export default function StepRecord({ onNext, onBack }: StepRecordProps) {
     const handleStart = () => {
       chunksRef.current = [];
       setStatusText("");
+      startTimeRef.current = performance.now();
     };
 
     const handleData = (event: BlobEvent) => {
@@ -66,6 +68,11 @@ export default function StepRecord({ onNext, onBack }: StepRecordProps) {
       if (chunksRef.current.length === 0) return;
       const blob = new Blob(chunksRef.current, { type: "audio/webm" });
       chunksRef.current = [];
+      const startedAt = startTimeRef.current;
+      startTimeRef.current = null;
+      const durationSeconds = startedAt
+        ? Math.max(0, (performance.now() - startedAt) / 1000)
+        : 0;
 
       setValue("audioBlob", blob, { shouldValidate: true });
 
@@ -75,6 +82,7 @@ export default function StepRecord({ onNext, onBack }: StepRecordProps) {
 
         const formData = new FormData();
         formData.append("file", blob, "recording.webm");
+        formData.append("durationSeconds", durationSeconds.toFixed(3));
 
         const response = await fetch("/api/rev-ai", {
           method: "POST",
